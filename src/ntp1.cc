@@ -5,6 +5,7 @@
 #include <TCanvas.h>
 //C++ INCLUDES
 #include <fstream>
+#include <math.h>
 
 void ntp1::Loop()
 {
@@ -19,7 +20,11 @@ void ntp1::Loop()
     if (ientry < 0) break;
     nb = fChain->GetEntry(jentry);   nbytes += nb;
     // if (Cut(ientry) < 0) continue;
-    ofs << runNumber << " " << eventNumber << "\n";
+    //ofs << runNumber << " " << eventNumber << "\n";
+    for( int i = 0; i < nAK5PFPUcorrJet; i++ )
+      {
+	PrintJetInfo( i );
+      }
   }
   ofs.close();
   
@@ -46,7 +51,7 @@ bool ntp1::isLoosePFPUcorrJet(int i)
   
   float neutralHadFrac = neutralHadronEnergyAK5PFPUcorrJet[i]/UE;
   float neutralEMFrac = photonEnergyAK5PFPUcorrJet[i]/UE;
-  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFNoPUJet[i]+
+  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFPUcorrJet[i]+
     photonMultiplicityAK5PFPUcorrJet[i] + electronMultiplicityAK5PFPUcorrJet[i] +
     muonMultiplicityAK5PFPUcorrJet[i] + HFHadronMultiplicityAK5PFPUcorrJet[i] +
     HFEMMultiplicityAK5PFPUcorrJet[i];
@@ -86,7 +91,7 @@ bool ntp1::isMediumPFPUcorrJet(int i)
   
   float neutralHadFrac = neutralHadronEnergyAK5PFPUcorrJet[i]/UE;
   float neutralEMFrac = photonEnergyAK5PFPUcorrJet[i]/UE;
-  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFNoPUJet[i]+
+  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFPUcorrJet[i]+
     photonMultiplicityAK5PFPUcorrJet[i] + electronMultiplicityAK5PFPUcorrJet[i] +
     muonMultiplicityAK5PFPUcorrJet[i] + HFHadronMultiplicityAK5PFPUcorrJet[i] +
     HFEMMultiplicityAK5PFPUcorrJet[i];
@@ -122,7 +127,7 @@ bool ntp1::isTightPFPUcorrJet(int i)
   
   float neutralHadFrac = neutralHadronEnergyAK5PFPUcorrJet[i]/UE;
   float neutralEMFrac = photonEnergyAK5PFPUcorrJet[i]/UE;
-  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFNoPUJet[i]+
+  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFPUcorrJet[i]+
     photonMultiplicityAK5PFPUcorrJet[i] + electronMultiplicityAK5PFPUcorrJet[i] +
     muonMultiplicityAK5PFPUcorrJet[i] + HFHadronMultiplicityAK5PFPUcorrJet[i] +
     HFEMMultiplicityAK5PFPUcorrJet[i];
