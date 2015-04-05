@@ -27,15 +27,115 @@ void ntp1::Loop()
 
 bool ntp1::isLoosePFPUcorrJet(int i)
 {
+  double px = pxAK5PFPUcorrJet[i];
+  double py = pyAK5PFPUcorrJet[i];
+  double pt = sqrt( px*px + py*py );
+  float UE = uncorrenergyAK5PFPUcorrJet[i];
+  float eta = etaAK5PFPUcorrJet[i];
   
+  float neutralHadFrac = neutralHadronEnergyAK5PFPUcorrJet[i]/UE;
+  float neutralEMFrac = photonEnergyAK5PFPUcorrJet[i]/UE;
+  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFNoPUJet[i]+
+    photonMultiplicityAK5PFPUcorrJet[i] + electronMultiplicityAK5PFPUcorrJet[i] +
+    muonMultiplicityAK5PFPUcorrJet[i] + HFHadronMultiplicityAK5PFPUcorrJet[i] +
+    HFEMMultiplicityAK5PFPUcorrJet[i];
+  float muonFrac = muonEnergyAK5PFPUcorrJet[i]/UE;
+  float chargedEMFrac = electronEnergyAK5PFPUcorrJet[i]/UE;
+  float chargedHadFrac = chargedHadronEnergyAK5PFPUcorrJet[i]/UE;
+  int chargedMult = chargedHadronMultiplicityAK5PFPUcorrJet[i]+
+    electronMultiplicityAK5PFPUcorrJet[i]+
+    muonMultiplicityAK5PFPUcorrJet[i]; 
+  if ( neutralHadFrac < 0.99 && neutralEMFrac < 0.99 && nConstituents > 1 && muonFrac < 0.8  && chargedEMFrac < 0.9 )
+    {
+      if ( fabs(eta) > 2.4 )
+        {
+          return true;
+        }
+      else if ( fabs(eta) < 2.4 && chargedHadFrac > .0 && chargedMult > 0 && chargedEMFrac < 0.99)
+        {
+          return true;
+        }
+      else
+        {
+          return false;
+        }
+    }
+  /*
+    std::cout << "[DEBUG]: " << UE << " " << pt << " " << eta << " " << neutralHadFrac << " " << neutralEMFrac << " " 
+  << nConstituents << " " << muonFrac << " " << chargedEMFrac
+          << " " << chargedHadFrac << " " << chargedMult << std::endl;
+  */
+  return false;
 };
 
 bool ntp1::isMediumPFPUcorrJet(int i)
 {
+  float UE = uncorrenergyAK5PFPUcorrJet[i];
+  float eta = etaAK5PFPUcorrJet[i];
   
+  float neutralHadFrac = neutralHadronEnergyAK5PFPUcorrJet[i]/UE;
+  float neutralEMFrac = photonEnergyAK5PFPUcorrJet[i]/UE;
+  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFNoPUJet[i]+
+    photonMultiplicityAK5PFPUcorrJet[i] + electronMultiplicityAK5PFPUcorrJet[i] +
+    muonMultiplicityAK5PFPUcorrJet[i] + HFHadronMultiplicityAK5PFPUcorrJet[i] +
+    HFEMMultiplicityAK5PFPUcorrJet[i];
+  float muonFrac = muonEnergyAK5PFPUcorrJet[i]/UE;
+  float chargedEMFrac = electronEnergyAK5PFPUcorrJet[i]/UE;
+  float chargedHadFrac = chargedHadronEnergyAK5PFPUcorrJet[i]/UE;
+  int chargedMult = chargedHadronMultiplicityAK5PFPUcorrJet[i]+
+    electronMultiplicityAK5PFPUcorrJet[i]+
+    muonMultiplicityAK5PFPUcorrJet[i];
+  if ( neutralHadFrac < 0.95 && neutralEMFrac < 0.95 && nConstituents > 1 && muonFrac < 0.8  && chargedEMFrac < 0.9 )
+    {
+      if ( fabs(eta) > 2.4 )
+        {
+          return true;
+        }
+      else if ( fabs(eta) < 2.4 && chargedHadFrac > .0 && chargedMult > 0 && chargedEMFrac < 0.99)
+        {
+          return true;
+        }
+      else
+        {
+          return false;
+	}
+    }
+  
+  return false;
 };
 
 bool ntp1::isTightPFPUcorrJet(int i)
 {
+  float UE = uncorrenergyAK5PFPUcorrJet[i];
+  float eta = etaAK5PFPUcorrJet[i];
+  
+  float neutralHadFrac = neutralHadronEnergyAK5PFPUcorrJet[i]/UE;
+  float neutralEMFrac = photonEnergyAK5PFPUcorrJet[i]/UE;
+  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFNoPUJet[i]+
+    photonMultiplicityAK5PFPUcorrJet[i] + electronMultiplicityAK5PFPUcorrJet[i] +
+    muonMultiplicityAK5PFPUcorrJet[i] + HFHadronMultiplicityAK5PFPUcorrJet[i] +
+    HFEMMultiplicityAK5PFPUcorrJet[i];
+  float muonFrac = muonEnergyAK5PFPUcorrJet[i]/UE;
+  float chargedEMFrac = electronEnergyAK5PFPUcorrJet[i]/UE;
+  float chargedHadFrac = chargedHadronEnergyAK5PFPUcorrJet[i]/UE;
+  int chargedMult = chargedHadronMultiplicityAK5PFPUcorrJet[i]+
+    electronMultiplicityAK5PFPUcorrJet[i]+
+    muonMultiplicityAK5PFPUcorrJet[i];
+  if ( neutralHadFrac < 0.90 && neutralEMFrac < 0.90 && nConstituents > 1 && muonFrac < 0.8  && chargedEMFrac < 0.9 )
+    {
+      if ( fabs(eta) > 2.4 )
+        {
+          return true;
+        }
+      else if ( fabs(eta) < 2.4 && chargedHadFrac > .0 && chargedMult > 0 && chargedEMFrac < 0.99)
+        {
+          return true;
+        }
+      else
+        {
+          return false;
+	}
+    }
 
+  return false;
 };
