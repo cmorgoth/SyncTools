@@ -25,3 +25,17 @@ void ntp1::Loop()
   
 };
 
+bool ntp1::isLoosePFPUcorrJet(int i)
+{
+  
+};
+
+bool ntp1::isMediumPFPUcorrJet(int i)
+{
+  
+};
+
+bool ntp1::isTightPFPUcorrJet(int i)
+{
+
+};

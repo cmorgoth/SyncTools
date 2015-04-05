@@ -1383,9 +1383,9 @@ public :
    virtual void     Loop();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
-   virtual bool isLoosePFPUcorrJet(int i);
-   virtual bool isMediumPFPUcorrJet(int i);
-   virtual bool isTightPFPUcorrJet(int i);
+   virtual bool     isLoosePFPUcorrJet(int i);
+   virtual bool     isMediumPFPUcorrJet(int i);
+   virtual bool     isTightPFPUcorrJet(int i);
 };
 
 #endif
