@@ -1386,6 +1386,7 @@ public :
    virtual bool     isLoosePFPUcorrJet(int i);
    virtual bool     isMediumPFPUcorrJet(int i);
    virtual bool     isTightPFPUcorrJet(int i);
+   virtual void     PrintJetInfo( int i );
 };
 
 #endif

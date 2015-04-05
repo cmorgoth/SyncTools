@@ -25,6 +25,17 @@ void ntp1::Loop()
   
 };
 
+void ntp1::PrintJetInfo( int i )
+{
+  double pt = sqrt( uncorrpxAK5PFPUcorrJet[i]*uncorrpxAK5PFPUcorrJet[i] + uncorrpyAK5PFPUcorrJet[i]*uncorrpyAK5PFPUcorrJet[i] );
+  float csv = combinedSecondaryVertexBJetTagsAK5PFPUcorrJet[i];
+  std::cout << "uE: " << uncorrenergyAK5PFPUcorrJet[i] << " pt: " << pt 
+	    << " eta: " << etaAK5PFPUcorrJet[i] << " phi: " << phiAK5PFPUcorrJet[i]
+	    << " jetArea: " << areaAK5PFPUcorrJet  << " CSV: " << csv 
+	    << " isLoose: " << isLoosePFPUcorrJet( i ) << " isMedium: " << isMediumPFPUcorrJet( i )
+	    << " isTight: " << isTightPFPUcorrJet( i ) << std::endl;
+};
+
 bool ntp1::isLoosePFPUcorrJet(int i)
 {
   double px = pxAK5PFPUcorrJet[i];
