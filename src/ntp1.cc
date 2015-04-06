@@ -5,6 +5,7 @@
 #include <TCanvas.h>
 //C++ INCLUDES
 #include <fstream>
+#include <cmath>
 #include <math.h>
 
 void ntp1::Loop()
