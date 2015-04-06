@@ -21,7 +21,11 @@ void ntp1::Loop()
     if (ientry < 0) break;
     nb = fChain->GetEntry(jentry);   nbytes += nb;
     // if (Cut(ientry) < 0) continue;
-    ofs << runNumber << " " << eventNumber << "\n";
+    //ofs << runNumber << " " << eventNumber << "\n";
+    for( int i = 0; i < nAK5PFPUcorrJet; i++ )
+      {
+	PrintJetInfo( i );
+      }
   }
   ofs.close();
   

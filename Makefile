@@ -8,16 +8,25 @@ LDFLAGS := $(shell root-config --glibs) $(STDLIBDIR)
 
 CPPFLAGS += -g -std=c++11
 
-TARGET = CompareTrees
+TARGET  = CompareTrees
+TARGET1 = PrintNtp1 
 
 SRC = app/CompareTrees.cc src/ntp1.cc src/aux.cc
+SRC1 = app/PrintNtp1.cc src/ntp1.cc
 
 OBJ = $(SRC:.cc=.o)
+OBJ1 = $(SRC1:.cc=.o)
 
-all : $(TARGET)
+all : $(TARGET) $(TARGET1)
 
 $(TARGET) : $(OBJ)
 	$(LD) $(CPPFLAGS) -o $(TARGET) $(OBJ) $(LDFLAGS)
+	@echo $@
+	@echo $<
+	@echo $^
+
+$(TARGET1) : $(OBJ1)
+	$(LD) $(CPPFLAGS) -o $(TARGET1) $(OBJ1) $(LDFLAGS)
 	@echo $@
 	@echo $<
 	@echo $^
@@ -27,4 +36,4 @@ $(TARGET) : $(OBJ)
 	@echo $@
 	@echo $<
 clean :
-	rm -f *.o src/*.o $(TARGET) *~
+	rm -f *.o src/*.o $(TARGET) $(TARGET1) *~
