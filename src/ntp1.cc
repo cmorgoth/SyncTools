@@ -5,6 +5,8 @@
 #include <TCanvas.h>
 //C++ INCLUDES
 #include <fstream>
+#include <cmath>
+#include <math.h>
 
 void ntp1::Loop()
 {
@@ -46,7 +48,7 @@ bool ntp1::isLoosePFPUcorrJet(int i)
   
   float neutralHadFrac = neutralHadronEnergyAK5PFPUcorrJet[i]/UE;
   float neutralEMFrac = photonEnergyAK5PFPUcorrJet[i]/UE;
-  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFNoPUJet[i]+
+  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFPUcorrJet[i]+
     photonMultiplicityAK5PFPUcorrJet[i] + electronMultiplicityAK5PFPUcorrJet[i] +
     muonMultiplicityAK5PFPUcorrJet[i] + HFHadronMultiplicityAK5PFPUcorrJet[i] +
     HFEMMultiplicityAK5PFPUcorrJet[i];
@@ -86,7 +88,7 @@ bool ntp1::isMediumPFPUcorrJet(int i)
   
   float neutralHadFrac = neutralHadronEnergyAK5PFPUcorrJet[i]/UE;
   float neutralEMFrac = photonEnergyAK5PFPUcorrJet[i]/UE;
-  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFNoPUJet[i]+
+  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFPUcorrJet[i]+
     photonMultiplicityAK5PFPUcorrJet[i] + electronMultiplicityAK5PFPUcorrJet[i] +
     muonMultiplicityAK5PFPUcorrJet[i] + HFHadronMultiplicityAK5PFPUcorrJet[i] +
     HFEMMultiplicityAK5PFPUcorrJet[i];
@@ -122,7 +124,7 @@ bool ntp1::isTightPFPUcorrJet(int i)
   
   float neutralHadFrac = neutralHadronEnergyAK5PFPUcorrJet[i]/UE;
   float neutralEMFrac = photonEnergyAK5PFPUcorrJet[i]/UE;
-  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFNoPUJet[i]+
+  int nConstituents = chargedHadronMultiplicityAK5PFPUcorrJet[i] + neutralHadronMultiplicityAK5PFPUcorrJet[i]+
     photonMultiplicityAK5PFPUcorrJet[i] + electronMultiplicityAK5PFPUcorrJet[i] +
     muonMultiplicityAK5PFPUcorrJet[i] + HFHadronMultiplicityAK5PFPUcorrJet[i] +
     HFEMMultiplicityAK5PFPUcorrJet[i];
