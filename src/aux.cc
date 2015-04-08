@@ -65,9 +65,9 @@ bool CreateDiff( std::string file1, std::string file2, std::string tree1, std::s
   TTree* t1 = (TTree*)f1->Get( tree1.c_str() );
   
   TFile* f2 = new TFile( file2.c_str() );
-  TDirectoryFile* dir = (TDirectoryFile*)f2->Get("ntuples");
-  //TTree* t2 = (TTree*)f2->Get( tree2.c_str() ); 
-  TTree* t2 = (TTree*)dir->Get( tree2.c_str() );
+  //TDirectoryFile* dir = (TDirectoryFile*)f2->Get("ntuples");
+  TTree* t2 = (TTree*)f2->Get( tree2.c_str() ); 
+  //TTree* t2 = (TTree*)dir->Get( tree2.c_str() );
   
   TString t2_name = "t2";
   t1->AddFriend( t2, t2_name );
@@ -76,7 +76,7 @@ bool CreateDiff( std::string file1, std::string file2, std::string tree1, std::s
   C->cd();
 
   std::ifstream ifs( var_list.c_str(), std::ifstream::in );
-
+  std::cout << "DEBUG 0"  << std::endl;
   if ( ifs.is_open() )
     {
       int i_histo = 0;
@@ -116,12 +116,17 @@ bool CreateDiff( std::string file1, std::string file2, std::string tree1, std::s
               //t1->Draw( tmp.str().c_str() , "nPho-t2.nPho == 0 && nPerPVPho == t2.nPerPVPho", "goff");                                   
               //t1->Draw( tmp.str().c_str() , "nPerPVPho == t2.nPerPVPho", "goff");
 	      //t1->Draw( tmp.str().c_str() , "", "goff");                                                          
-	      t1->Draw( tmp.str().c_str() , "sqrt(uncorrpxAK5PFPUcorrJet*uncorrpxAK5PFPUcorrJet+uncorrpyAK5PFPUcorrJet*uncorrpyAK5PFPUcorrJet)>21.0", "goff");  
+	      t1->Draw( tmp.str().c_str() , "event == t2.event && run == t2.run", "goff"); 
+	      //t1->Draw( tmp.str().c_str() , "sqrt(uncorrpxAK5PFPUcorrJet*uncorrpxAK5PFPUcorrJet+uncorrpyAK5PFPUcorrJet*uncorrpyAK5PFPUcorrJet)>21.0", "goff");  
 	      TH1F* h_tmp = (TH1F*)gDirectory->Get( tmp_h.str().c_str() );
               if ( h_tmp->GetRMS() > 0.0 ) std::cout << var1 << " " << var2 << std::endl;
               h_tmp->Draw();
               C->SetLogy();
 	      std::string h_name = "data/"+var2+".pdf";
+	      if( h_name.find("()") != std::string::npos ){
+		h_name = h_name.substr(0,h_name.find("()")) + ".pdf";
+		std::cout << h_name << std::endl;
+	      }
               C->SaveAs( h_name.c_str() );
               i_histo++;
 	    }//different tree case
