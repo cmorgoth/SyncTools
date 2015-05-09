@@ -8,6 +8,20 @@
 //LOCAL INCLUDES
 #include "aux.hh"
 
+std::string ParseCommandLine( int argc, char* argv[], std::string opt )
+{
+  for (int i = 1; i < argc; i++ )
+    {
+      std::string tmp( argv[i] );
+      if ( tmp.find( opt ) != std::string::npos )
+	{
+	  return tmp.substr( tmp.find_last_of("=") + 1 );
+	}
+    }
+
+  return "";
+};
+
 TH1F* MakeDiff( ntp1* t1, ntp1* t2, std::string var_name, std::string var_type)
 {
   TH1F* h_tmp = new TH1F( var_name.c_str(), var_name.c_str(), 1000, -10, 10);
@@ -138,4 +152,58 @@ bool CreateDiff( std::string file1, std::string file2, std::string tree1, std::s
       return false;
     }
   
+};
+
+
+std::map < std::string, evt > MakeMap( std::string fname )
+{
+  std::map < std::string, evt > mymap;
+  std::string run, event;
+  std::string key;
+  std::ifstream ifs ( fname.c_str(), std::fstream::in );
+  if ( ifs.is_open() )
+    {
+      while ( ifs.good() )
+	{
+	  ifs >> run >> event;
+	  evt tmp_evt;
+	  tmp_evt.run = run;
+	  tmp_evt.event = event;
+	  key = run + event;
+	  if( mymap.find( key ) == mymap.end() )
+	    {
+	      mymap[key] = tmp_evt;
+	    }
+	}
+    }
+  else
+    {
+      std::cerr << "[ERROR]: unable to open file" << std::endl;
+    }
+  
+  std::cout << "[INFO]: map size: " << mymap.size() << std::endl;
+  
+  return mymap;
+};
+
+void CreateDiff( std::map < std::string, evt > map1, std::map < std::string, evt > map2, std::string outname )
+{
+  std::ofstream ofs ( outname.c_str(), std::fstream::out );
+  for ( auto& m1 : map1 )
+    {
+      if ( map2.find( m1.first ) == map2.end() )
+	{
+	  ofs << m1.second.run << " " << m1.second.event << "\n";
+	}
+    }
+  ofs.close();
+};
+
+void Usage()
+{
+  std::cout << "===================================================" << std::endl;
+  std::cout << "[USAGE]: for general information, please see README" << std::endl;
+  std::cout << "===================================================" << std::endl;
+  
+  std::cout << "[USAGE]: ./CompareEvents --file1==path_to_first_file --file2==path_to_first_file" << std::endl;
 };
